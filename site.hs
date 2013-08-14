@@ -28,7 +28,7 @@ main = hakyll $ do
     compile $ do makeItem "<div class='span2'/>"
       >>= loadAndApplyTemplate "templates/work-link.html" (wpCtx "current"  "cu" "current" $ head (filter isCurrent paintings))
 --      >>= loadAndApplyTemplate "templates/work-link.html" (wpCtx "currenta" "ca" "Older" $ head $ filter isCurrentA paintings)
-      >>= loadAndApplyTemplate "templates/work-link.html" (wpCtx "archive"  "ar" "archive" $ head $ filter isArchive paintings)
+      >>= loadAndApplyTemplate "templates/work-link.html" (wpCtx "archive"  "ar" "archive" $ head $ filter (\p -> "Drawing Circle 4" == paintingName p) paintings)
 --      >>= makeItem "<div class='span2'/>"
       >>= loadAndApplyTemplate "templates/work.html" postCtx
       >>= loadAndApplyTemplate "templates/layout.html" (postCtx' "work")
@@ -118,8 +118,6 @@ isArchive = isType A
 
 data PaintingType = C | CA | A deriving Eq
 data Painting = Painting PaintingType String String String 
-
--- 15,16,14,17,18,19,20,21,22,10,23
 
 paintings :: [Painting]
 paintings = [
